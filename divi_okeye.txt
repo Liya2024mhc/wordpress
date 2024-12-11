@@ -1,0 +1,860 @@
+integration 
+
+
+<!-- Collapsible Mobile Menu -->
+<script defer>
+    jQuery(function($) {
+        $(document).ready(function() {
+            $("body ul.et_mobile_menu li.menu-item-has-children, body ul.et_mobile_menu  li.page_item_has_children").append('<a href="#" class="mobile-toggle"></a>');
+            $('ul.et_mobile_menu li.menu-item-has-children .mobile-toggle, ul.et_mobile_menu li.page_item_has_children .mobile-toggle').click(function(event) {
+                event.preventDefault();
+                $(this).parent('li').toggleClass('dt-open');
+                $(this).parent('li').find('ul.children').first().toggleClass('visible');
+                $(this).parent('li').find('ul.sub-menu').first().toggleClass('visible');
+            });
+            iconFINAL = 'P';
+            $('body ul.et_mobile_menu li.menu-item-has-children, body ul.et_mobile_menu li.page_item_has_children').attr('data-icon', iconFINAL);
+            $('.mobile-toggle').on('mouseover', function() {
+                $(this).parent().addClass('is-hover');
+            }).on('mouseout', function() {
+                $(this).parent().removeClass('is-hover');
+            })
+        });
+    }); 
+</script>
+
+<script defer>
+	jQuery(function($) {
+        $(document).ready(function() {
+			$(".mobile_nav.closed span.mobile_menu_bar").click(function(event) {
+				setTimeout(Toggle, 300);
+				function Toggle() {
+ 					$(".et_pb_menu__logo img").toggleClass("light-img");
+				}
+			});
+		});
+    });
+</script>
+
+<!-- header-nav-mobile-email and custom icons -->
+
+<script>
+	jQuery(function($) {
+        $(document).ready(function() {
+			$(".header-nav-mobile-email").prepend("<span class='nav-mobile-email-icon'></span>");
+			$(".header-nav-mobile-phone").prepend("<span class='nav-mobile-phone-icon'></span>");
+			$(".blurb-services-grid-hp .et_pb_module_header").append("<span class='services-grid-right-arrow'></span>");
+		});
+	});
+	
+</script>
+<!-- Collapsible Mobile Menu Closed -->
+
+general part
+
+@import url('https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;0,700;0,900;1,300;1,400;1,700;1,900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap');
+
+/* Globals */
+
+.et_pb_text_inner a {
+	color: #006495;
+	text-decoration: underline;
+}
+
+/* Headings */
+
+.et_pb_text_inner h1 {
+  font-family: "Merriweather", serif;
+	font-size: 56px;
+  font-weight: 500;
+}
+
+.et_pb_text_inner h2 {
+  font-family: "Merriweather", serif;
+	font-size: 42px;
+  font-weight: 500;
+}
+
+.et_pb_text_inner h3 {
+  font-family: "Merriweather", serif;
+  font-size: 36px;
+}
+
+.et_pb_text_inner h4 {
+  font-family: "Merriweather", serif;
+	font-size: 28px;
+  font-weight: 500;
+}
+
+.et_pb_text_inner h5 {
+  font-family: "Merriweather", serif;
+	font-size: 22px;
+  font-weight: 500;
+}
+
+.et_pb_text_inner h6 {
+  font-family: "Merriweather", serif;
+	font-size: 18px;
+  font-weight: 500;
+}
+
+.et_pb_text_inner p {
+  font-family: "Open Sans", serif;
+  font-size: 16px;
+  font-weight: 500;
+	line-height: 1.8em;
+}
+
+/* Headings Closed */
+
+.mb-button-navbar, .header-nav-mobile-email, .header-nav-mobile-phone {
+	display: none!important;
+}
+
+/* Email and phone */
+
+.header-nav-mobile-email {
+	
+}
+
+.header-nav-mobile-phone {
+	
+}
+
+/* Header Menu li */
+
+.header-mhc-nav a {
+	color: #000;
+}
+
+/* ########### Responsive CSS Media queries ########### */
+
+/* 
+  ##Device = Small Desktop Screens (portrait)
+  ##Screen = B/w 1366px to 1980px
+*/
+
+@media (min-width: 1366px) and (max-width: 1980px) {
+  
+	/* CSS */
+  
+}
+
+/* 
+  ##Device = Small Desktop Screens (landscape) Rarely exists but not compulsory to use, you can use portrait media queries
+  ##Screen = B/w 1366px to 1980px
+*/
+
+@media (min-width: 1366px) and (max-width: 1980px) and (orientation: landscape) {
+  
+	/* CSS */
+  
+}
+
+/* 
+  ##Device = Tablets, Ipads (portrait) iPad Mini
+  ##Screen = B/w 768px to 1024px
+*/
+
+@media (min-width: 768px) and (max-width: 1024px) {
+  
+  /* CSS */
+  
+}
+
+/* 
+  ##Device = Tablets, Ipads (landscape) iPad Mini
+  ##Screen = B/w 768px to 1024px
+*/
+
+@media (min-width: 768px) and (max-width: 1024px) and (orientation: landscape) {
+  
+	/* CSS */
+  
+}
+
+/* 
+  ##Device = Tablets, Ipads (portrait) iPad Air
+  ##Screen = B/w 1024px to 1180px
+*/
+
+@media (min-width: 1024px) and (max-width: 1180px) {
+  
+	/* CSS */
+  
+}
+
+/* 
+  ##Device = Tablets, Ipads (landscape) iPad Air
+  ##Screen = B/w 1024px to 1180px
+*/
+
+@media (min-width: 1024px) and (max-width: 1180px) and (orientation: landscape) {
+  
+	/* CSS */
+  
+}
+
+/* 
+  ##Device = Tablets, Ipads (portrait) iPad Pro
+  ##Screen = B/w 1180px to 1366px
+*/
+
+@media (min-width: 1180px) and (max-width: 1366px) {
+  
+	/* CSS */
+  
+}
+
+/* 
+  ##Device = Tablets, Ipads (landscape) iPad Pro
+  ##Screen = B/w 1180px to 1366px
+*/
+
+@media (min-width: 1180px) and (max-width: 1366px) and (orientation: landscape) {
+  
+	/* CSS */
+  
+}
+
+/* 
+  ##Device = Most of the Smartphones Mobiles (Portrait)
+  ##Screen = B/w 320px to 479px
+*/
+
+@media (min-width: 320px) and (max-width: 480px) {
+  
+	/*   Top bar */
+	.top-bar-mhc {
+		display: none;
+	}
+	
+	.header-mhc-nav #mobile_menu1 {
+		top: 0px!important;
+		z-index: -1;
+		border-top: 0px!important;
+	}
+	
+	.header-mhc-nav .et_pb_menu__wrap {
+		z-index: 5;
+	}
+	
+	.header-mhc-nav .et_pb_menu__logo-wrap {
+		z-index: 9!important;
+	}
+	
+	.header-mhc-nav .et_pb_menu__logo-wrap {
+		padding-top: 12px;
+	}
+	
+	.header-mhc-nav a {
+		text-align: center!important;
+	}
+	
+	.header-mhc-nav ul.sub-menu, .header-mhc-nav .et_mobile_menu li li {
+		padding-left: 0px!important;
+	}
+	
+	.header-mhc-nav ul#mobile_menu1>li:first-child {
+		padding-top: 72px;
+	}
+	
+	.header-mhc-nav .closed .mobile_menu_bar::before {
+		color: #000!important;
+	}
+	
+	.header-mhc-nav .opened .mobile_menu_bar::before {
+		color: #fff!important;
+	}
+	
+	img.light-img {
+		filter: brightness(0) invert(1);
+	}
+	
+	.header-mhc-nav .et_pb_menu__wrap .mobile_menu_bar {
+		transform: translatey(38%);
+	}
+	
+	.header-mhc-nav a {
+		color: #fff!important;
+	}
+	
+	.mb-button-navbar {
+		display: block!important;
+		width: 70%;
+        margin: auto;
+	}
+	
+	.header-nav-mobile-email, .header-nav-mobile-phone {
+		display: block!important;
+	}
+	
+	.mb-button-navbar, .header-nav-mobile-email, .header-nav-mobile-phone {
+		margin: 30px auto;
+	}
+	
+	/* 	Email */
+	
+	li.header-nav-mobile-email {
+		display: flex !important;
+		align-items: center;
+		justify-content: center;
+	}
+	
+	span.nav-mobile-email-icon {
+		background: #fff;
+		color: #000 !important;
+		border-radius: 100px;
+		padding: 8px 15px !important;
+	}
+	
+	span.nav-mobile-email-icon::before {
+		font-family: ETmodules!important;
+		content: '\e010';
+		color: #000;
+		font-size: 16px;
+	}
+	
+	/* 	Email */
+	
+	li.header-nav-mobile-phone {
+		display: flex !important;
+		align-items: center;
+		justify-content: center;
+	}
+	
+	span.nav-mobile-phone-icon {
+		background: #fff;
+		color: #000 !important;
+		border-radius: 100px;
+		padding: 8px 15px !important;
+	}
+	
+	span.nav-mobile-phone-icon::before {
+		font-family: ETmodules!important;
+		content: '\e090';
+		color: #000;
+		font-size: 16px;
+	}
+	
+	/* 9:16 */
+
+	.mhc-aspect-image-ratio-9-16 .et_pb_image_wrap  {
+	  padding-top: 66%!important;
+	  display: block;
+	}
+
+	.mhc-aspect-image-ratio-9-16 .et_pb_image_wrap img {
+	  position: absolute;
+	  width: 100%!important;
+	  height: 100%!important;
+	  top: 0;
+	  bottom: 0;
+	  left: 0;
+	  right: 0;
+	  object-fit: cover;
+	}
+	
+	.mhc-aspect-image-ratio-16-9-2 .et_pb_image_wrap  {
+		padding-top: 80%!important;
+		display: block;
+	}
+
+	.mhc-aspect-image-ratio-16-9-2 .et_pb_image_wrap img {
+		position: absolute;
+		width: 100%!important;
+		height: 100%!important;
+		top: 0;
+		bottom: 0;
+		left: 0;
+		right: 0;
+		object-fit: cover;
+	}
+	
+	.mhc-aspect-image-ratio-9-16-about .et_pb_image_wrap  {
+	  padding-top: 66%!important;
+	  display: block;
+	}
+
+	.mhc-aspect-image-ratio-9-16-about .et_pb_image_wrap img {
+	  position: absolute;
+	  width: 100%!important;
+	  height: 100%!important;
+	  top: 0;
+	  bottom: 0;
+	  left: 0;
+	  right: 0;
+	  object-fit: cover;
+	}
+	
+	.mhc-aspect-image-ratio-16-9-about .et_pb_image_wrap  {
+	  padding-top: 66%!important;
+	  display: block;
+	}
+
+	.mhc-aspect-image-ratio-16-9-about .et_pb_image_wrap img {
+	  position: absolute;
+	  width: 100%!important;
+	  height: 100%!important;
+	  top: 0;
+	  bottom: 0;
+	  left: 0;
+	  right: 0;
+	  object-fit: cover;
+	}
+
+	/* 9:16 */
+	
+	.custom-display-image-responsive .et_pb_column:not(:first-child) {
+		display: none!important;
+	}
+  
+}
+
+/* 
+  ##Device = Most of the Smartphones Mobiles (Landscape)
+  ##Screen = B/w 320px to 479px
+*/
+
+@media (min-width: 320px) and (max-width: 480px) and (orientation: landscape) {
+  
+  /* CSS */
+  
+}
+
+
+/* Header */
+
+.header-nav-blurb .et_pb_blurb_content {
+	display: flex;
+	gap: 12px;
+	align-items: center;
+	justify-content: space-between;
+}
+
+.header-nav-blurb .et_pb_main_blurb_image {
+	margin-bottom: 0px!important;
+}
+
+.header-nav-blurb h4.et_pb_module_header, .header-nav-blurb {
+	padding-bottom: 0px!important;
+}
+
+/* Nav Mobile */
+
+.header-mhc-nav .et_pb_menu__wrap {
+	justify-content: flex-end!important;
+	padding-right: 12px;
+}
+
+/* Mobile buttons */
+
+.mb-button-navbar>a {
+	background: #fff;
+	border-radius: 100px;
+	padding: 10px 36px;
+	color: #000!important;
+	opacity: 1!important;
+}
+
+.mb-button-navbar>a:hover {
+	background: #004226!important;
+	color: #fff!important;
+}
+
+.header-mhc-nav .et_mobile_menu li a {
+	border: none!important;
+}
+
+/* Mobile Menu Collapsible */
+
+/*change hamburger icon to x when mobile menu is open*/
+
+#et_mobile_nav_menu .mobile_nav.opened .mobile_menu_bar::before,
+.et_pb_module.et_pb_menu .et_mobile_nav_menu .mobile_nav.opened .mobile_menu_bar::before {
+	content: '\4d';
+}
+
+
+/*adjust the new toggle element which is added via jQuery*/
+
+ul.et_mobile_menu li.menu-item-has-children .mobile-toggle,
+ul.et_mobile_menu li.page_item_has_children .mobile-toggle,
+.et-db #et-boc .et-l ul.et_mobile_menu li.menu-item-has-children .mobile-toggle,
+.et-db #et-boc .et-l ul.et_mobile_menu li.page_item_has_children .mobile-toggle {
+	width: 44px;
+	height: 100%;
+	padding: 0px !important;
+	max-height: 44px;
+	border: none;
+	position: absolute;
+	right: 0px;
+	filter: none!important;
+	top: 0px;
+	z-index: 999;
+	background-color: transparent;
+}
+
+
+/*some code to keep everyting positioned properly*/
+
+ul.et_mobile_menu>li.menu-item-has-children,
+ul.et_mobile_menu>li.page_item_has_children,
+ul.et_mobile_menu>li.menu-item-has-children .sub-menu li.menu-item-has-children,
+.et-db #et-boc .et-l ul.et_mobile_menu>li.menu-item-has-children,
+.et-db #et-boc .et-l ul.et_mobile_menu>li.page_item_has_children,
+.et-db #et-boc .et-l ul.et_mobile_menu>li.menu-item-has-children .sub-menu li.menu-item-has-children {
+	position: relative;
+}
+
+
+/*remove default background color from menu items that have children*/
+
+.et_mobile_menu .menu-item-has-children>a,
+.et-db #et-boc .et-l .et_mobile_menu .menu-item-has-children>a {
+	background-color: transparent;
+}
+
+
+/*hide the submenu by default*/
+
+ul.et_mobile_menu .menu-item-has-children .sub-menu,
+#main-header ul.et_mobile_menu .menu-item-has-children .sub-menu,
+.et-db #et-boc .et-l ul.et_mobile_menu .menu-item-has-children .sub-menu,
+.et-db #main-header ul.et_mobile_menu .menu-item-has-children .sub-menu {
+	display: none !important;
+	visibility: hidden !important;
+}
+
+
+/*show the submenu when toggled open*/
+
+ul.et_mobile_menu .menu-item-has-children .sub-menu.visible,
+#main-header ul.et_mobile_menu .menu-item-has-children .sub-menu.visible,
+.et-db #et-boc .et-l ul.et_mobile_menu .menu-item-has-children .sub-menu.visible,
+.et-db #main-header ul.et_mobile_menu .menu-item-has-children .sub-menu.visible {
+	display: block !important;
+	visibility: visible !important;
+}
+
+
+/*adjust the toggle icon position and transparency*/
+
+ul.et_mobile_menu li.menu-item-has-children .mobile-toggle,
+.et-db #et-boc .et-l ul.et_mobile_menu li.menu-item-has-children .mobile-toggle {
+	text-align: center;
+	opacity: 1;
+}
+
+
+/*submenu toggle icon when closed*/
+
+ul.et_mobile_menu li.menu-item-has-children .mobile-toggle::after,
+.et-db #et-boc .et-l ul.et_mobile_menu li.menu-item-has-children .mobile-toggle::after {
+	top: 10px;
+	position: relative;
+	font-family: "ETModules";
+	content: '\43';
+	color: #fff;
+	background: transparent;
+	border-radius: 50%;
+	padding: 3px;
+}
+
+
+/*submenu toggle icon when open*/
+
+ul.et_mobile_menu li.menu-item-has-children.dt-open>.mobile-toggle::after,
+.et-db #et-boc .et-l ul.et_mobile_menu li.menu-item-has-children.dt-open>.mobile-toggle::after {
+	content: '\42';
+}
+
+
+/*add point on top of the menu submenu dropdown*/
+
+.et_pb_menu_0.et_pb_menu .et_mobile_menu:after {
+	position: absolute;
+	right: 5%;
+	margin-left: -20px;
+	top: -14px;
+	width: 0;
+	height: 0;
+	content: '';
+	border-left: 20px solid transparent;
+	border-right: 20px solid transparent;
+	border-bottom: 20px solid #ffffff;
+}
+
+
+/*adjust the position of the hamburger menu*/
+
+.mobile_menu_bar {
+	position: relative;
+	display: block;
+	bottom: 10px;
+	line-height: 0;
+}
+
+
+/*force the background color and add a rounded border*/
+
+.et_pb_menu_0.et_pb_menu .et_mobile_menu,
+.et_pb_menu_0.et_pb_menu .et_mobile_menu ul {
+	background-color: #ffffff!important;
+	border-radius: 10px;
+}
+
+/* Mobile Menu Collapsible end */
+
+/* Aspect Ratio of Images */
+
+/* 9:16 */
+
+.mhc-aspect-image-ratio-9-16 .et_pb_image_wrap  {
+  padding-top: 144%;
+  display: block;
+}
+
+.mhc-aspect-image-ratio-9-16 .et_pb_image_wrap img {
+  position: absolute;
+  width: 100%!important;
+  height: 100%!important;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  object-fit: cover;
+}
+
+/* 9:16 */
+
+/* 16:9 */
+
+.mhc-aspect-image-ratio-16-9 .et_pb_image_wrap  {
+  padding-top: 66%;
+  display: block;
+}
+
+.mhc-aspect-image-ratio-16-9 .et_pb_image_wrap img {
+  position: absolute;
+  width: 100%!important;
+  height: 100%!important;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  object-fit: cover;
+}
+
+/* 16:9 */
+
+.mhc-aspect-image-ratio-9-16-services .et_pb_image_wrap  {
+  padding-top: 134%;
+  display: block;
+}
+
+.mhc-aspect-image-ratio-9-16-services .et_pb_image_wrap img {
+  position: absolute;
+  width: 100%!important;
+  height: 100%!important;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  object-fit: cover;
+}
+
+.mhc-aspect-image-ratio-9-16-about .et_pb_image_wrap  {
+  padding-top: 90%;
+  display: block;
+}
+
+.mhc-aspect-image-ratio-9-16-about .et_pb_image_wrap img {
+  position: absolute;
+  width: 100%!important;
+  height: 100%!important;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  object-fit: cover;
+}
+
+.mhc-aspect-image-ratio-16-9-about .et_pb_image_wrap  {
+  padding-top: 57%;
+  display: block;
+}
+
+.mhc-aspect-image-ratio-16-9-about .et_pb_image_wrap img {
+  position: absolute;
+  width: 100%!important;
+  height: 100%!important;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  object-fit: cover;
+}
+/* 16: 9 / 2 */
+
+.mhc-aspect-image-ratio-16-9-2 .et_pb_image_wrap  {
+  padding-top: 50%;
+  display: block;
+}
+
+.mhc-aspect-image-ratio-16-9-2 .et_pb_image_wrap img {
+  position: absolute;
+  width: 100%!important;
+  height: 100%!important;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  object-fit: cover;
+}
+
+/* 16:9 */
+
+.mhc-aspect-image-ratio-1-1 .et_pb_image_wrap  {
+  padding-top: 100%;
+  display: block;
+}
+
+.mhc-aspect-image-ratio-1-1 .et_pb_image_wrap img {
+  position: absolute;
+  width: 100%!important;
+  height: 100%!important;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  object-fit: cover;
+}
+
+/* 16:9 */
+
+/* Button Person Card */
+
+.services-card-button-person {
+	border-radius: 30px 30px 0px 0px;
+	width: 100%!important;
+	max-width: 100%!important;
+	position: absolute;
+	margin: auto;
+	bottom: 0;
+	right: 0;
+	left: 0;
+}
+
+/* Blurb Arrow right icon */
+
+.blurb-services-grid-hp .et_pb_module_header span.services-grid-right-arrow::after {
+	font-family: ETmodules;
+	color: #000;
+	content: "\24";
+	font-size: 28px;
+}
+
+.blurb-services-grid-hp .et_pb_module_header {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+}
+
+.blurb-services-grid-hp:hover span.services-grid-right-arrow::after {
+	color: #006495;
+}
+
+/* Our Doctors Grid Blurb */
+
+.our-doctor-grid-blurb .et_pb_main_blurb_image .et_pb_image_wrap img {
+	border-radius: 30px;
+}
+/* 
+.our-doctor-grid-blurb .et_pb_main_blurb_image .et_pb_image_wrap {
+	padding-top: 144%;
+	display: block;
+}
+
+.our-doctor-grid-blurb .et_pb_main_blurb_image .et_pb_image_wrap img {
+  position: absolute;
+  width: 100%!important;
+  height: 100%!important;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  object-fit: cover; 
+  border-radius: 30px;
+} */
+
+/* hp services images grid */
+
+.grid-services-image-grid-hp .et_pb_image_wrap {
+	padding-top: 120%;
+	display: block;
+}
+
+.grid-services-image-grid-hp .et_pb_image_wrap img {
+  position: absolute;
+  width: 100%!important;
+  height: 100%!important;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  object-fit: cover; 
+  border-radius: 30px;
+}
+
+.grid-services-image-grid-hp-var .et_pb_image_wrap {
+	padding-top: 144%;
+	display: block;
+}
+
+.grid-services-image-grid-hp-var .et_pb_image_wrap img {
+  position: absolute;
+  width: 100%!important;
+  height: 100%!important;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  object-fit: cover; 
+  border-radius: 30px;
+}
+
+
+explanataion part 
+1.	For each section followed with media queries for different dimension that how it needs to be aligned with desktop, iPad (mini, air, pro) and mobile devices like in landscape and in portrait orientations  
+2.	In desktop, for menus
+a.	add menus, icons and styles using display flex property, adjust the padding, margin size with align contents
+b.	add the 2nd sets of menus with text alignment property in visual builder
+3.	In mobiles, for menus
+a.	set top:0px, change the background and contents styles with custom classes
+b.	for the logo change with mobile and desktop, add toggle effect with 300ms
+c.	for the mobile and email icons we use the property of prepend like $(“menu_li_class_name”).prepend(“<span class=’span_class_name’></span>”)
+4.	For footer, 
+a.	Add image, first row with 5 columns, second row with 3 columns and add row with text module for copyright use dynamic property for year
+5.	For footer in mobile, adjust each column with flex property and make contents to the center of mobile dimension
+6.	In desktop, 
+a.	First section of home page uses 2 columns with text with button and image module.
+b.	Second section with button with no spacing
+c.	Third section uses text, 3 blurb images with button and adjust the button radius also the position: absolute, give 4 sides to 0 to remove spaces around the images and fill the container
+d.	Fourth section uses title paragraph, blurb setting and add et modules for right arrow and adjust with hover effect fully (hover: after) 
+for arrow icon to be add to last, we use append property $(“blurb_content_custom_class_name .divi_class”).append(“<span class=’right_arrow_custom_class_name’><?span>”)
+e.	5th section uses 2 columns with image on overlay and add text, also icon with z-index measurements
+f.	6th section uses title paragraph, blurb images of 3 columns and middle image with vertical or horizontal offset can be variable, add icon with center alignment
+g.	7th section with 4 images in 4 columns with align-self: center property, give styling to image div and image module of the two different sizes of the images
+7.	In mobile,
+a.	Doctors section remove middle blurb the vertical offset with 0px to align blurb to correct position
+b.	For the 4 columns with 4 images only first image to be visible by the property of custom class with column: not (: first-child) as display: none
+c.	4 icons section give property of display: flex, flex-wrap: wrap and gap:2%; and give each icon with wdth:49%
+d.	Also, in mobile for 4 icons give width for 100% to maintain the text arrangement
+e.	Adjust the sizing of each section with each module 
+
+
+
+
+
