@@ -1,0 +1,199 @@
+body 
+
+<script>
+	jQuery(document).ready(function($) {
+  $('.slick-gallery').slick({
+    slidesToShow: 3,  
+    slidesToScroll: 1,  
+    autoplay: true,  
+    autoplaySpeed: 4000,  
+    arrows: true,  
+    prevArrow: '<button type="button" class="slick-prev">&#8592;</button>',   
+    nextArrow: '<button type="button" class="slick-next">&#8594;</button>', 
+    responsive: [
+      {
+        breakpoint: 1024,
+        settings: {
+           slidesToShow: 2, //tablet
+          slidesToScroll: 1
+        }
+      },
+      {
+        breakpoint: 768,
+        settings: {
+          slidesToShow: 1, //mobile
+          slidesToScroll: 1
+        }
+      }
+    ]
+  });
+});
+
+</script>
+
+
+css
+/* gallery slider */
+.slick-gallery {
+  width: 100%;
+  margin: 0 auto;
+}
+
+.slick-gallery img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+
+.slick-slide {
+  padding: 0 3px; 
+}
+
+
+.slick-prev, .slick-next {
+  background-color: transparent; 
+  border: none; 
+  color: white; 
+  font-size: 36px; 
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 1;
+  cursor: pointer;
+  font-family: "Arial", sans-serif;  
+}
+
+/* left */
+.slick-prev {
+  left: 10px;  
+  font-size: 30px;  
+}
+
+/* right */
+.slick-next {
+  right: 10px;  
+  font-size: 30px;  
+}
+
+ 
+.slick-prev:hover, .slick-next:hover {
+  color: red;  
+}
+
+.current-menu-item>a {
+  text-decoration: underline;
+}
+
+
+html for adding images
+<div class="slick-gallery">
+  <div><img src="https://toucan.mhcstaging.com/wp-content/uploads/2024/10/Gray-Dog.webp"></div>
+  <div><img src="https://toucan.mhcstaging.com/wp-content/uploads/2024/10/Gray-Dog.webp"></div>
+  <div><img src="https://toucan.mhcstaging.com/wp-content/uploads/2024/10/Gray-Dog.webp"></div>
+  <div><img src="https://toucan.mhcstaging.com/wp-content/uploads/2024/10/Gray-Dog.webp"></div>
+  <div><img src="https://toucan.mhcstaging.com/wp-content/uploads/2024/10/Gray-Dog.webp"></div>
+  <div><img src="https://toucan.mhcstaging.com/wp-content/uploads/2024/10/Gray-Dog.webp"></div>
+</div>
+
+
+
+
+
+LINKS
+
+1. https://symbl.cc/en/2192/
+2. https://stackoverflow.com/questions/29043562/add-custom-buttons-on-slick-carousel
+3. https://stackoverflow.com/questions/31669086/slick-carousel-responsive-breakpoints
+4. https://codeamend.com/blog/slick-slider-syncing-with-example/
+5. https://www.tutorialspoint.com/adding-a-carousel-to-your-site-with-slick-js
+6. https://stackoverflow.com/questions/49028877/slick-carousel-force-slides-to-have-the-same-height
+7. https://stackoverflow.com/questions/29043562/add-custom-buttons-on-slick-carousel
+8. https://kenwheeler.github.io/slick/
+
+
+
+
+
+gallery with sliders
+
+
+
+
+/* Display two gallery images */
+@media only screen and (min-width: 981px) {
+	
+	/* Set images to 50% width */
+	.gallery-two-at-a-time .et_pb_gallery_item {
+		max-width: 50%;
+	}
+	
+	/* Force display of the image after the currently displayed one */
+	.gallery-two-at-a-time .et-pb-active-slide + .et_pb_gallery_item {
+		display: block !important; 
+		opacity: 1 !important; 
+		z-index: 1 !important;
+		left: 50%;
+	}
+	
+	/* Display the first image at the end */
+	.gallery-two-at-a-time .et_pb_gallery_item:first-child:not(.et-pb-active-slide) {
+		display: block !important; 
+		opacity: 1 !important; 
+		z-index: 0 !important;
+		left: 50%;
+	}
+}
+
+.gallery-two-at-a-time .et_pb_gallery_item{
+	border:15px solid transparent;
+}
+.gallery-two-at-a-time .et_pb_gallery_items{
+	margin:auto;
+	width:94% !important;
+}
+
+/* Show slider arrows always */
+.gallery-two-at-a-time .et-pb-arrow-next {
+       opacity: 1;
+       right: -12px;
+  color: #000!important;
+}
+.gallery-two-at-a-time .et-pb-arrow-prev{
+       opacity: 1;
+       left: -12px;
+  color: #000!important;
+}
+
+.gallery-two-at-a-time:hover .et-pb-arrow-next {
+       opacity: 1;
+       right: -12px;
+  		color: #000!important;
+}
+.gallery-two-at-a-time:hover .et-pb-arrow-prev {
+       opacity: 1;
+       left: -12px!important;
+  		color: #000!important;
+}
+
+.gallery-two-at-a-time .et-pb-controllers {
+  display: none;
+}
+
+/*image gallery item aspect ratio portrait 9:16*/
+
+.gallery-two-at-a-time .et_pb_gallery_image {
+  padding-top: 60%;
+  display: block;
+}
+
+.gallery-two-at-a-time .et_pb_gallery_item img {
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  object-fit: cover;
+}
