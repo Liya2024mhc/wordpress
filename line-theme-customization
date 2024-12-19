@@ -1,0 +1,119 @@
+// link theme customization
+function my_custom_theme_link_menu() {
+    // Add the main menu page
+    add_menu_page(
+        'Link Theme Settings',
+        'Link Setting',
+        'manage_options',
+        'my_options',
+        'my_options_page_html'
+    );
+    
+    // Add the submenus
+    add_submenu_page(
+        'my_options',            
+        'All Links',             
+        'All Links',              
+        'manage_options',          
+        'all_links',              
+        'all_links_page_html'     
+    );
+
+    add_submenu_page(
+        'my_options',             
+        'Add New Link',           
+        'Add New Link',          
+        'manage_options',        
+        'add_new_link',           
+        'add_new_link_page_html'  
+    );
+}
+
+add_action( 'admin_menu', 'my_custom_theme_link_menu' );
+
+// Callback function for the all links page
+function all_links_page_html() {
+    // Fetch all the links  
+    $links = get_option('custom_links', []);
+
+    echo '<div class="wrap"><h1>All Links</h1>';
+
+    if ( ! empty( $links ) ) {
+        echo '<table class="widefat fixed" cellspacing="0">';
+        echo '<thead><tr>';
+        echo '<th class="manage-column column-url">Link URL</th>';
+		echo '<th class="manage-column column-url">Actions</th>';
+        echo '</tr></thead>';
+        echo '<tbody>';
+
+        // Loop through each link and display it in the table
+        foreach ( $links as $index => $link ) {
+            $link_url = esc_url( $link['url'] );
+
+            // Display each link in a row
+            echo '<tr>';
+            echo '<td><a href="' . $link_url . '" target="_blank">' . $link_url . '</a></td>';
+			echo '<td>';
+            echo '<a href=" " class="button">Update</a> ';
+            echo '<a href="" class="button" onclick="return confirm(\'Are you sure you want to delete this link?\');">Delete</a>';
+            echo '</td>';
+            echo '</tr>';
+            echo '</tr>';
+			
+			
+        }
+
+        echo '</tbody>';
+        echo '</table>';
+    } else {
+        echo '<p>No links have been added yet.</p>';
+    }
+
+    echo '</div>';
+}
+
+
+// Callback function for the "Add New Link" page
+function add_new_link_page_html() {
+    // Handle form submission
+    if ( isset( $_POST['submit_link'] ) ) {
+        $new_link = [
+//             'title' => sanitize_text_field( $_POST['link_title'] ),
+            'url' => esc_url_raw( $_POST['link_url'] ),
+        ];
+
+        // Get existing links, if any
+        $links = get_option('custom_links', []);
+
+        // Add the new link to the list
+        $links[] = $new_link;
+
+        // Save the updated list  
+        update_option('custom_links', $links);
+
+        echo '<div class="updated"><p>Link added successfully!</p></div>';
+    }
+
+    // Form to add a new link
+    echo '<div class="wrap"><h1>Add New Link</h1>';
+    echo '<form method="POST" action="">';
+    echo '<table class="form-table">';
+//     echo '<tr>';
+//     echo '<th><label for="link_title">Link Title</label></th>';
+//     echo '<td><input type="text" id="link_title" name="link_title" class="regular-text" required></td>';
+//     echo '</tr>';
+    echo '<tr>';
+    echo '<th><label for="link_url">Link URL</label></th>';
+    echo '<td><input type="url" id="link_url" name="link_url" class="regular-text" required></td>';
+    echo '</tr>';
+    echo '</table>';
+    echo '<p><input type="submit" name="submit_link" class="button button-primary" value="Add Link"></p>';
+    echo '</form>';
+    echo '</div>';
+}
+
+// Callback function for the main "Link Setting" page
+function my_options_page_html() {
+    echo '<div class="wrap"><h1>Link Theme Settings</h1>';
+    echo '</div>';
+}s
