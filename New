@@ -1,3 +1,4 @@
+https://codecanel.com/how-do-i-create-a-custom-slider-plugin-in-wordpress/
 <?php
 // Register Admin Menu
 function custom_slider_admin_menu() {
