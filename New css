@@ -1,0 +1,40 @@
+.custom-slider-wrapper {
+    overflow: hidden;
+    position: relative;
+}
+
+.custom-slider {
+    display: flex;
+    transition: transform 0.5s ease;
+}
+
+.slider-item {
+    flex: 1 0 25%; /* 4 images on desktop */
+    box-sizing: border-box;
+    padding: 10px;
+}
+
+.slider-item img {
+    width: 100%; /* Ensure the image fills its container */
+    height: 200px; /* Set a fixed height for all images */
+    object-fit: cover; /* Crop images to fit within the dimensions */
+    border-radius: 5px;
+}
+
+@media (max-width: 1024px) {
+    .slider-item {
+        flex: 1 0 33.33%; /* 3 images on iPads */
+    }
+}
+
+@media (max-width: 768px) {
+    .slider-item {
+        flex: 1 0 50%; /* 2 images on smaller screens */
+    }
+}
+
+@media (max-width: 480px) {
+    .slider-item {
+        flex: 1 0 100%; /* 1 image on mobile */
+    }
+}
