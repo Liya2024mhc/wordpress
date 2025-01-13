@@ -89,3 +89,49 @@ hhhhhhhh
         flex: 1 0 100%; /* 1 image on mobile */
     }
 }
+hhhhhhhuuuuuuuuu
+.custom-slider-wrapper {
+    overflow: hidden;
+    position: relative;
+}
+
+.custom-slider {
+    display: flex;
+    transition: transform 0.5s ease;
+}
+
+.slider-item {
+    flex: 1 0 25%; /* 4 images on desktop */
+    box-sizing: border-box;
+    padding: 10px;
+    position: relative;
+    aspect-ratio: 4 / 3; /* Set the desired aspect ratio (e.g., 4:3) */
+    overflow: hidden; /* Ensure images don't spill outside the container */
+}
+
+.slider-item img {
+    width: 100%; /* Ensure the image fills the container horizontally */
+    height: 100%; /* Ensure the image fills the container vertically */
+    object-fit: cover; /* Crop images to perfectly fit the container */
+    object-position: center; /* Center the image if cropping occurs */
+    display: block;
+    border-radius: 5px; /* Optional: Rounded corners */
+}
+
+@media (max-width: 1024px) {
+    .slider-item {
+        flex: 1 0 33.33%; /* 3 images on tablets */
+    }
+}
+
+@media (max-width: 768px) {
+    .slider-item {
+        flex: 1 0 50%; /* 2 images on smaller screens */
+    }
+}
+
+@media (max-width: 480px) {
+    .slider-item {
+        flex: 1 0 100%; /* 1 image on mobile */
+    }
+}
