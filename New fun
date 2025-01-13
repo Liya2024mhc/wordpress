@@ -1,0 +1,27 @@
+function custom_slider_shortcode() {
+    $images = get_option('custom_slider_images', []);
+    if (empty($images)) {
+        return '<p>No images found for the slider.</p>';
+    }
+
+    ob_start();
+    ?>
+    <div class="custom-slider-wrapper">
+        <!-- Left Arrow -->
+        <button class="slider-arrow left-arrow">&lt;</button>
+
+        <!-- Slider -->
+        <div class="custom-slider">
+            <?php foreach ($images as $image_url): ?>
+                <div class="slider-item">
+                    <img src="<?php echo esc_url($image_url); ?>" alt="Slider Image">
+                </div>
+            <?php endforeach; ?>
+        </div>
+
+        <!-- Right Arrow -->
+        <button class="slider-arrow right-arrow">&gt;</button>
+    </div>
+    <?php
+    return ob_get_clean();
+}
