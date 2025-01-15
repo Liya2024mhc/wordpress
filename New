@@ -437,3 +437,275 @@ function custom_slider_autoplay_script() {
 }
 add_action('wp_footer', 'custom_slider_autoplay_script');
 ?>
+
+
+
+
+
+
+
+
+
+
+function custom_slider_admin_menu() {
+    add_menu_page(
+        'Custom Slider', // Page Title
+        'Custom Slider', // Menu Title
+        'manage_options', // Capability
+        'custom-slider', // Menu Slug
+        'custom_slider_admin_page', // Callback Function
+        'dashicons-images-alt2', // Icon
+        20 // Position
+    );
+}
+add_action('admin_menu', 'custom_slider_admin_menu');
+
+// Admin Page for Slider Settings
+function custom_slider_admin_page() {
+    if (isset($_POST['custom_slider_images'])) {
+        update_option('custom_slider_images', array_filter($_POST['custom_slider_images'])); // Save images
+        echo '<div class="updated"><p>Slider images updated successfully!</p></div>';
+    }
+
+    $images = get_option('custom_slider_images', []);
+    ?>
+    <div class="wrap">
+        <h1>Custom Slider Settings</h1>
+        <form method="post">
+            <table class="form-table">
+                <tbody id="slider-images">
+                    <?php foreach ($images as $image): ?>
+                        <tr>
+                            <td>
+                                <input type="text" name="custom_slider_images[]" value="<?php echo esc_url($image); ?>" style="width:80%;" placeholder="Image URL">
+                                <button type="button" class="remove-image button">Remove</button>
+                            </td>
+                        </tr>
+                    <?php endforeach; ?>
+                </tbody>
+            </table>
+            <button type="button" id="add-image" class="button">Add Image</button>
+            <p><input type="submit" value="Save Changes" class="button button-primary"></p>
+        </form>
+    </div>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const addImageBtn = document.getElementById('add-image');
+            const sliderImages = document.getElementById('slider-images');
+
+            addImageBtn.addEventListener('click', function () {
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                    <td>
+                        <input type="text" name="custom_slider_images[]" style="width:80%;" placeholder="Image URL">
+                        <button type="button" class="remove-image button">Remove</button>
+                    </td>
+                `;
+                sliderImages.appendChild(row);
+            });
+
+            sliderImages.addEventListener('click', function (e) {
+                if (e.target.classList.contains('remove-image')) {
+                    e.target.closest('tr').remove();
+                }
+            });
+        });
+    </script>
+    <?php
+}
+
+// Add Shortcode for Slider
+function custom_slider_shortcode() {
+    $images = get_option('custom_slider_images', []);
+    if (empty($images)) {
+        return '<p>No images found for the slider.</p>';
+    }
+
+    ob_start();
+    ?>
+	<!-- Left Arrow -->
+        <button class="slider-arrow left-arrow">&lt;</button>
+    <div class="custom-slider-wrapper">
+        
+        <!-- Slider -->
+        <div class="custom-slider">
+            <!-- Clone Last Image for Seamless Loop -->
+            <div class="slider-item">
+                <img src="<?php echo esc_url(end($images)); ?>" alt="Slider Image">
+            </div>
+
+            <?php foreach ($images as $image_url): ?>
+                <div class="slider-item">
+                    <img src="<?php echo esc_url($image_url); ?>" alt="Slider Image">
+                </div>
+            <?php endforeach; ?>
+
+            <!-- Clone First Image for Seamless Loop -->
+            <div class="slider-item">
+                <img src="<?php echo esc_url(reset($images)); ?>" alt="Slider Image">
+            </div>
+        </div>
+
+        
+    </div>
+<!-- Right Arrow -->
+        <button class="slider-arrow right-arrow">&gt;</button>
+    <?php
+    return ob_get_clean();
+}
+add_shortcode('custom_slider', 'custom_slider_shortcode');
+
+// Add Styles for Slider
+function custom_slider_styles() {
+    ?>
+    <style>
+        .custom-slider-wrapper {
+            overflow: hidden;
+            position: relative;
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .custom-slider {
+            display: flex;
+            transition: transform 0.5s ease;
+            will-change: transform;
+        }
+
+        .slider-item {
+            flex: 1 0 25%;
+            box-sizing: border-box;
+            padding: 10px;
+        }
+
+        .slider-item img {
+            width: 80%;
+            height: 80%;
+            object-fit: contain;
+            border-radius: 5px;
+        }
+
+        .slider-arrow {
+            position: absolute;
+			top: 85%;
+            transform: translateY(-50%);
+/*             background-color: rgba(0, 0, 0, 0.6); */
+            color: #000000 !important;
+            border: none;
+            padding: 10px 20px;
+            cursor: pointer;
+            z-index: 10;
+            border-radius: 50%;
+			font-size:33px;
+			background: transparent;
+			vertical-align: middle; 
+			outline: none;
+			border: none;
+        }
+
+        .left-arrow {
+            left: -25px;
+        }
+
+        .right-arrow {
+            right: 6px;
+        }
+
+/*         .slider-arrow:hover {
+            background-color: none !important;
+        } */
+		
+
+        @media (max-width: 1024px) {
+            .slider-item {
+                flex: 1 0 33.33%;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .slider-item {
+                flex: 1 0 50%;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .slider-item {
+                flex: 1 0 104%;
+            }
+			.slider-arrow { 
+				top:97%;
+			}
+			.left-arrow {
+    			left: 35%;
+			}
+			.right-arrow {
+				right: 40%;
+			}
+        }
+    </style>
+    <?php
+}
+add_action('wp_head', 'custom_slider_styles');
+
+// Add JavaScript for Arrows and Infinite Looping
+function custom_slider_scripts() {
+    ?>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const slider = document.querySelector('.custom-slider');
+            const items = slider.querySelectorAll('.slider-item');
+            const leftArrow = document.querySelector('.left-arrow');
+            const rightArrow = document.querySelector('.right-arrow');
+            let index = 1; // Start at the first real image
+            let itemWidth = items[0].clientWidth;
+
+            // Function to set the initial position and recalculate widths
+            function initializeSlider() {
+                itemWidth = items[0].clientWidth; // Recalculate width
+                slider.style.transition = 'none'; // Disable transition temporarily
+                slider.style.transform = `translateX(-${index * itemWidth}px)`;
+            }
+
+            // Initialize slider on page load
+            initializeSlider();
+
+            // Recalculate and reposition on window resize
+            window.addEventListener('resize', initializeSlider);
+
+            function slideTo(newIndex) {
+                slider.style.transition = 'transform 0.5s ease';
+                slider.style.transform = `translateX(-${newIndex * itemWidth}px)`;
+                index = newIndex;
+
+                slider.addEventListener('transitionend', function () {
+                    if (index === 0) {
+                        // Jump to the last real slide
+                        slider.style.transition = 'none';
+                        index = items.length - 2;
+                        slider.style.transform = `translateX(-${index * itemWidth}px)`;
+                    } else if (index === items.length - 1) {
+                        // Jump to the first real slide
+                        slider.style.transition = 'none';
+                        index = 1;
+                        slider.style.transform = `translateX(-${index * itemWidth}px)`;
+                    }
+                }, { once: true });
+            }
+
+            // Arrow Event Listeners
+            rightArrow.addEventListener('click', function () {
+                slideTo(index + 1);
+            });
+
+            leftArrow.addEventListener('click', function () {
+                slideTo(index - 1);
+            });
+
+            // Autoplay
+            setInterval(() => slideTo(index + 1), 3000);
+        });
+    </script>
+    <?php
+}
+add_action('wp_footer', 'custom_slider_scripts');
