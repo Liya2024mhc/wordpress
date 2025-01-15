@@ -43,3 +43,69 @@
         flex: 1 0 100%; /* 1 image on mobile */
     }
 }
+
+
+
+
+
+
+function custom_slider_scripts() {
+    ?>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const slider = document.querySelector('.custom-slider');
+            const items = slider.querySelectorAll('.slider-item');
+            const leftArrow = document.querySelector('.left-arrow');
+            const rightArrow = document.querySelector('.right-arrow');
+            let index = 1; // Start at the first real image
+            let itemWidth = items[0].clientWidth;
+
+            // Function to set the initial position and recalculate widths
+            function initializeSlider() {
+                itemWidth = items[0].clientWidth; // Recalculate width
+                slider.style.transition = 'none'; // Disable transition temporarily
+                slider.style.transform = `translateX(-${index * itemWidth}px)`;
+            }
+
+            // Initialize slider on page load
+            initializeSlider();
+
+            // Recalculate and reposition on window resize
+            window.addEventListener('resize', initializeSlider);
+
+            function slideTo(newIndex) {
+                slider.style.transition = 'transform 0.5s ease';
+                slider.style.transform = `translateX(-${newIndex * itemWidth}px)`;
+                index = newIndex;
+
+                slider.addEventListener('transitionend', function () {
+                    if (index === 0) {
+                        // Jump to the last real slide
+                        slider.style.transition = 'none';
+                        index = items.length - 2;
+                        slider.style.transform = `translateX(-${index * itemWidth}px)`;
+                    } else if (index === items.length - 1) {
+                        // Jump to the first real slide
+                        slider.style.transition = 'none';
+                        index = 1;
+                        slider.style.transform = `translateX(-${index * itemWidth}px)`;
+                    }
+                }, { once: true });
+            }
+
+            // Arrow Event Listeners
+            rightArrow.addEventListener('click', function () {
+                slideTo(index + 1);
+            });
+
+            leftArrow.addEventListener('click', function () {
+                slideTo(index - 1);
+            });
+
+            // Autoplay
+            setInterval(() => slideTo(index + 1), 3000);
+        });
+    </script>
+    <?php
+}
+add_action('wp_footer', 'custom_slider_scripts');
