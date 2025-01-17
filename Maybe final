@@ -1,28 +1,26 @@
-// Enqueue Media Uploader Script
+//CUSTOM SLIDER 
+// media upload
 function enqueue_media_uploader() {
-    // Enqueue WordPress media uploader scripts
     wp_enqueue_media();
 }
 add_action('admin_enqueue_scripts', 'enqueue_media_uploader');
 
-// Add Admin Menu for Slider
-function custom_slider_admin_menu() {
+function custom_slider_menu() {
     add_menu_page(
-        'Custom Slider', // Page Title
-        'Custom Slider', // Menu Title
-        'manage_options', // Capability
-        'custom-slider', // Menu Slug
-        'custom_slider_admin_page', // Callback Function
-        'dashicons-images-alt2', // Icon
-        20 // Position
+        'Custom Slider',  
+        'Custom Slider',  
+        'manage_options',  
+        'custom-slider',  
+        'custom_slider_admin_page',  
+        'dashicons-images-alt2',  
+        20  
     );
 }
-add_action('admin_menu', 'custom_slider_admin_menu');
+add_action('admin_menu', 'custom_slider_menu');
 
-// Admin Page Content
 function custom_slider_admin_page() {
     if (isset($_POST['custom_slider_images'])) {
-        update_option('custom_slider_images', array_filter($_POST['custom_slider_images'])); // Save images
+        update_option('custom_slider_images', array_filter($_POST['custom_slider_images']));  
         echo '<div class="updated"><p>Slider images updated successfully!</p></div>';
     }
 
@@ -53,7 +51,7 @@ function custom_slider_admin_page() {
             const addImageBtn = document.getElementById('add-image');
             const sliderImages = document.getElementById('slider-images');
 
-            // WordPress Media Uploader
+            // upload media 
             function openMediaUploader(input) {
                 const mediaUploader = wp.media({
                     title: 'Select Image',
@@ -71,7 +69,7 @@ function custom_slider_admin_page() {
                 mediaUploader.open();
             }
 
-            // Add new row with upload option
+            // adding new row with upload option
             addImageBtn.addEventListener('click', function () {
                 const row = document.createElement('tr');
                 row.innerHTML = `
@@ -84,10 +82,10 @@ function custom_slider_admin_page() {
                 sliderImages.appendChild(row);
             });
 
-            // Event delegation for upload and remove buttons
+             
             sliderImages.addEventListener('click', function (e) {
                 if (e.target.classList.contains('upload-image')) {
-                    const input = e.target.previousElementSibling; // Input field before the button
+                    const input = e.target.previousElementSibling;  
                     openMediaUploader(input);
                 }
 
@@ -100,7 +98,7 @@ function custom_slider_admin_page() {
     <?php
 }
 
-// Add Shortcode for Slider
+// slider shortcode
 function custom_slider_shortcode() {
     $images = get_option('custom_slider_images', []);
     if (empty($images)) {
@@ -109,13 +107,11 @@ function custom_slider_shortcode() {
 
     ob_start();
     ?>
-    <div class="custom-slider-wrapper">
-        <!-- Left Arrow -->
-        <button class="slider-arrow left-arrow">&lt;</button>
-
-        <!-- Slider -->
+         <!-- left arrow -->
+        <button class="slider-arrow left-arrow">&#9664;</button>  
+    <div class="custom-slider-begin">
         <div class="custom-slider">
-            <!-- Clone Last Image for Seamless Loop -->
+            <!--loop -->
             <div class="slider-item">
                 <img src="<?php echo esc_url(end($images)); ?>" alt="Slider Image">
             </div>
@@ -125,30 +121,27 @@ function custom_slider_shortcode() {
                     <img src="<?php echo esc_url($image_url); ?>" alt="Slider Image">
                 </div>
             <?php endforeach; ?>
-
-            <!-- Clone First Image for Seamless Loop -->
             <div class="slider-item">
                 <img src="<?php echo esc_url(reset($images)); ?>" alt="Slider Image">
             </div>
-        </div>
-
-        <!-- Right Arrow -->
-        <button class="slider-arrow right-arrow">&gt;</button>
+        </div>   
     </div>
+		<!-- right arrow -->
+        <button class="slider-arrow right-arrow">&#9654;</button>
     <?php
     return ob_get_clean();
 }
 add_shortcode('custom_slider', 'custom_slider_shortcode');
 
-// Add Styles for Slider
+// styles
 function custom_slider_styles() {
     ?>
     <style>
-        .custom-slider-wrapper {
+        .custom-slider-begin {
             overflow: hidden;
             position: relative;
             width: 100%;
-            max-width: 1200px;
+            max-width: 100%;
             margin: 0 auto;
         }
 
@@ -166,8 +159,8 @@ function custom_slider_styles() {
 
         .slider-item img {
             width: 100%;
-            height: 200px;
-            object-fit: cover;
+            height: 70px;
+            object-fit: contain;
             border-radius: 5px;
         }
 
@@ -175,46 +168,62 @@ function custom_slider_styles() {
             position: absolute;
             top: 50%;
             transform: translateY(-50%);
-            color: black;
+            color: #000000;
+			background-color:#fff;
+            font-size: 2em;
+            padding: 10px;
             border: none;
-            font-size: 24px;
-            padding: 0;
             cursor: pointer;
-            z-index: 10;
-            background: none;
         }
 
         .left-arrow {
-            left: -40px;
+            left: -40px;  
         }
 
         .right-arrow {
-            right: -40px;
+            right: -40px;  
         }
-
-        .slider-arrow:hover {
-            color: #333;
-        }
-
-        @media (max-width: 1024px) {
+		/* mini ipad landscape */
+        @media (min-width: 768px) and (max-width: 1024px) and (orientation: landscape) {
             .slider-item {
                 flex: 1 0 33.33%;
             }
-
-            .left-arrow, .right-arrow {
-                left: -30px;
-                right: -30px;
-            }
+			.slider-item img {
+            width: 100%;
+            height: 50px;
+            object-fit: contain;
+            border-radius: 5px;
+        }	
         }
-
+		
+		/* ipad air landscape */
+		@media (min-width: 1024px) and (max-width: 1180px) and (orientation: landscape) {
+  		.slider-item img {
+            width: 85%;
+            height: 70px;
+            object-fit: contain;
+			}
+		}
+		
+		/* 		ipad pro portrait */
+		@media (min-width: 1180px) and (max-width: 1366px) {
+  			.slider-item img {
+            width: 85%;
+            height: 70px;
+            object-fit: contain;
+			}
+		}
+		/*ipad pro landscape */
+		@media (min-width: 1180px) and (max-width: 1366px) and (orientation: landscape) { 
+			.slider-item img {
+            width: 85%;
+            height: 70px;
+            object-fit: contain;
+			}
+		}
         @media (max-width: 768px) {
             .slider-item {
                 flex: 1 0 50%;
-            }
-
-            .left-arrow, .right-arrow {
-                left: -20px;
-                right: -20px;
             }
         }
 
@@ -222,18 +231,13 @@ function custom_slider_styles() {
             .slider-item {
                 flex: 1 0 100%;
             }
-
-            .left-arrow, .right-arrow {
-                left: -15px;
-                right: -15px;
-            }
         }
     </style>
     <?php
 }
 add_action('wp_head', 'custom_slider_styles');
 
-// Add JavaScript for Slider Navigation
+// slider navigation
 function custom_slider_scripts() {
     ?>
     <script>
@@ -245,7 +249,7 @@ function custom_slider_scripts() {
             let index = 1;
             let itemWidth = items[0].clientWidth;
 
-            // Initialize slider position
+             
             function initializeSlider() {
                 itemWidth = items[0].clientWidth;
                 slider.style.transition = 'none';
@@ -254,6 +258,7 @@ function custom_slider_scripts() {
             initializeSlider();
             window.addEventListener('resize', initializeSlider);
 
+             
             function slideTo(newIndex) {
                 slider.style.transition = 'transform 0.5s ease';
                 slider.style.transform = `translateX(-${newIndex * itemWidth}px)`;
@@ -272,14 +277,25 @@ function custom_slider_scripts() {
                 }, { once: true });
             }
 
-            rightArrow.addEventListener('click', function () {
-                slideTo(index + 1);
-            });
-
+            //slider left
             leftArrow.addEventListener('click', function () {
-                slideTo(index - 1);
+                if (index === 0) {
+                    index = items.length - 2;
+                } else {
+                    index--;
+                }
+                slideTo(index);
             });
 
+            //slider right
+            rightArrow.addEventListener('click', function () {
+                if (index === items.length - 1) {
+                    index = 1;
+                } else {
+                    index++;
+                }
+                slideTo(index);
+            });
             setInterval(() => slideTo(index + 1), 3000);
         });
     </script>
