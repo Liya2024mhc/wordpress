@@ -1,3 +1,10 @@
+// Enqueue Media Uploader Script
+function enqueue_media_uploader() {
+    // Enqueue WordPress media uploader scripts
+    wp_enqueue_media();
+}
+add_action('admin_enqueue_scripts', 'enqueue_media_uploader');
+
 // Add Admin Menu for Slider
 function custom_slider_admin_menu() {
     add_menu_page(
@@ -12,7 +19,7 @@ function custom_slider_admin_menu() {
 }
 add_action('admin_menu', 'custom_slider_admin_menu');
 
-// Admin Page for Slider Settings
+// Admin Page Content
 function custom_slider_admin_page() {
     if (isset($_POST['custom_slider_images'])) {
         update_option('custom_slider_images', array_filter($_POST['custom_slider_images'])); // Save images
@@ -80,7 +87,7 @@ function custom_slider_admin_page() {
             // Event delegation for upload and remove buttons
             sliderImages.addEventListener('click', function (e) {
                 if (e.target.classList.contains('upload-image')) {
-                    const input = e.target.previousElementSibling; // The input field before the button
+                    const input = e.target.previousElementSibling; // Input field before the button
                     openMediaUploader(input);
                 }
 
