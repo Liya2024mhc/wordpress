@@ -54,3 +54,67 @@ if ( ! empty( $form_data['field'][49] ) ) {
 
 
 ?>
+
+
+
+
+
+<?php
+$person_name = $form_data['field'][6] ?? '';
+$program_name = $form_data['field'][31] ?? '';
+$current_date_constant = date('F j, Y');
+$year = date("Y"); 
+
+// Membership field values - should match JavaScript
+$membership_values = [
+    'Small Centers' => $entry['1'] ?? '',
+    'Medium Centers' => $entry['2'] ?? '',
+    'Large Centers' => $entry['3'] ?? '',
+    'Vendor' => $entry['4'] ?? '',
+    'Family Child Care Home' => $entry['5'] ?? '',
+    'Parent' => $entry['6'] ?? '',
+    'Individual' => $entry['7'] ?? '',
+    'Student' => $entry['8'] ?? '',
+];
+
+// Get selected membership
+$selected_membership = '';
+foreach ($membership_values as $name => $value) {
+    if (!empty($value)) {
+        $selected_membership = $name;
+        break;
+    }
+}
+
+// Get additional center names
+$add_centers_value = $entry['47'] ?? '';
+$add_centers_array = unserialize($add_centers_value);
+$center_names = [];
+
+for ($i = 1; $i <= 200; $i++) {
+    $center_key = $add_centers_array[$i][45][0] ?? null;
+    if ($center_key) {
+        $center_names[] = $center_key;
+    }
+}
+$total_centers = count($center_names);
+
+// Extract product names dynamically
+$product_field_ids = [17, 16, 20, 18, 25, 24, 50, 49];
+$product_names = [];
+
+foreach ($product_field_ids as $field_id) {
+    if (!empty($form_data['field'][$field_id])) {
+        $product_names[] = preg_replace('/\s*\([^)]*\)/', '', $form_data['field'][$field_id]);
+    }
+}
+
+// Generate Certificate Content
+$certificate_content = "<h2>Certificate of Membership</h2>";
+$certificate_content .= "<p>This certifies that <strong>$person_name</strong> is a member of <strong>$program_name</strong>.</p>";
+$certificate_content .= "<p>Membership Type: <strong>$selected_membership</strong></p>";
+$certificate_content .= "<p>Date: <strong>$current_date_constant</strong></p>";
+
+// Save the certificate as a file (or send via email)
+file_put_contents(get_template_directory() . "/certificates/certificate_$entry[id].html", $certificate_content);
+?>
