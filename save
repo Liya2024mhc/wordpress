@@ -1,3 +1,56 @@
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+    // Gravity Forms field IDs (replace with your actual field IDs)
+    const fields = [
+        { id: "input_1_1", price: 75 },  // Small Centers
+        { id: "input_1_2", price: 100 }, // Medium Centers
+        { id: "input_1_3", price: 150 }, // Large Centers
+        { id: "input_1_4", price: 100 }, // Vendor
+        { id: "input_1_5", price: 50 },  // Family Care
+        { id: "input_1_6", price: 25 },  // Parent
+        { id: "input_1_7", price: 25 },  // Individual
+        { id: "input_1_8", price: 25 },  // Student
+    ];
+
+    function updateTotal() {
+        let total = 0;
+        fields.forEach(field => {
+            let input = document.getElementById(field.id);
+            if (input && !input.disabled) {
+                let quantity = parseInt(input.value) || 0;
+                total += quantity * field.price;
+            }
+        });
+        document.getElementById("totalPrice").textContent = "$" + total.toFixed(2);
+    }
+
+    function disableOtherFields(selectedInput) {
+        fields.forEach(field => {
+            let input = document.getElementById(field.id);
+            if (input && input !== selectedInput) {
+                input.value = "";
+                input.disabled = selectedInput.value > 0;
+            } else {
+                input.disabled = false;
+            }
+        });
+        updateTotal();
+    }
+
+    fields.forEach(field => {
+        let input = document.getElementById(field.id);
+        if (input) {
+            input.addEventListener("input", function() {
+                disableOtherFields(this);
+            });
+        }
+    });
+});
+</script>
+
+
+
+
 <?php
 $person_name = $form_data['field'][6] ?? '';
 $program_name = $form_data['field'][31] ?? '';
