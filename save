@@ -1,0 +1,56 @@
+<?php
+$person_name = $form_data['field'][6] ?? '';
+$program_name = $form_data['field'][31] ?? '';
+$current_date_constant = date('F j, Y');
+$year = date("Y"); 
+
+$add_centers_value = $entry['47'];
+
+// Unserialize the value
+$add_centers_array = unserialize($add_centers_value);
+
+// // Access the nested values
+// $center_name = $add_centers_array[1][45][0];
+
+// Access the nested values and store valid center names
+$center_names = [];
+
+for ($i = 1; $i <= 200; $i++) {
+    $center_key = $add_centers_array[$i][45][0] ?? null;
+    if ($center_key) {
+        $center_names[] = $center_key;
+    }
+}
+
+$total_centers = count($center_names);
+
+// product field label name
+$product_names = array();
+if ( ! empty( $form_data['field'][17] ) ) {
+    $product_names[] = preg_replace( '/\s*\([^)]*\)/', '', $form_data['field'][17] );
+}
+if ( ! empty( $form_data['field'][16] ) ) {
+    $product_names[] = preg_replace( '/\s*\([^)]*\)/', '', $form_data['field'][16] );
+}
+if ( ! empty( $form_data['field'][20] ) ) {
+    $product_names[] = preg_replace( '/\s*\([^)]*\)/', '', $form_data['field'][20] );
+}
+if ( ! empty( $form_data['field'][18] ) ) {
+    $product_names[] = preg_replace( '/\s*\([^)]*\)/', '', $form_data['field'][18] );
+}
+if ( ! empty( $form_data['field'][25] ) ) {
+    $product_names[] = preg_replace( '/\s*\([^)]*\)/', '', $form_data['field'][25] );
+}
+if ( ! empty( $form_data['field'][24] ) ) {
+    $product_names[] = preg_replace( '/\s*\([^)]*\)/', '', $form_data['field'][24] );
+}
+if ( ! empty( $form_data['field'][50] ) ) {
+    $product_names[] = preg_replace( '/\s*\([^)]*\)/', '', $form_data['field'][50] );
+}
+if ( ! empty( $form_data['field'][49] ) ) {
+    $product_names[] = preg_replace( '/\s*\([^)]*\)/', '', $form_data['field'][49] );
+}
+
+
+
+?>
