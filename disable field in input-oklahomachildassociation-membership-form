@@ -1,0 +1,55 @@
+<head>
+<script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+</head>
+<!-- Sample HTML structure -->
+<input type="number" id="input1" class="quantity-input" min="0" max="1" value="0">
+<input type="number" id="input2" class="quantity-input" min="0" max="1" value="0">
+<input type="number" id="input3" class="quantity-input" min="0" max="1" value="0">
+<input type="number" id="input4" class="quantity-input" min="0" max="1" value="0">
+
+
+<script>
+jQuery(document).ready(function($) {
+    // Function to update min and max values
+    function updateMinMax() {
+        var selectedInput = null;
+
+        // Find the input field with value 1
+        $('.quantity-input').each(function() {
+            if ($(this).val() == 1) {
+                selectedInput = $(this);
+            }
+        });
+
+        // If a field with value 1 is found, set others to 0
+        if (selectedInput) {
+            $('.quantity-input').each(function() {
+                if ($(this)[0] !== selectedInput[0]) {
+                    $(this).val(0).attr('min', 0).attr('max', 0);
+                }
+            });
+            selectedInput.attr('min', 1).attr('max', 1);
+        } else {
+            // Reset all fields to have min 0 and max 1 if none is selected
+            $('.quantity-input').each(function() {
+                $(this).attr('min', 0).attr('max', 1);
+            });
+        }
+    }
+
+    // Bind input event to all quantity inputs
+    $('.quantity-input').on('input', function() {
+    		if($(this).val() > 1)
+        {
+        	$(this).val(1);
+        }
+        if ($(this).val() == 1) {
+            // When an input is set to 1, ensure others are set to 0
+            $('.quantity-input').not(this).val(0);
+        }
+        updateMinMax();
+    });
+});
+
+
+</script>
