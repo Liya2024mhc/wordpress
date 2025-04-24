@@ -1,0 +1,16 @@
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    const up = document.getElementById("scroll-up");
+    const down = document.getElementById("scroll-down");
+    const blurb = document.querySelector(".scroll-blurb");
+
+    if (up && down && blurb) {
+      up.addEventListener("click", () => {
+        blurb.scrollBy({ top: -100, behavior: 'smooth' });
+      });
+      down.addEventListener("click", () => {
+        blurb.scrollBy({ top: 100, behavior: 'smooth' });
+      });
+    }
+  });
+</script>
