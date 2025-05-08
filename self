@@ -17,7 +17,69 @@ now in pdf amount is
     <?php endif; ?>
 can you help me with these in dynamic chnage in pdf 
 
+<?php
+/**
+ * Gravity PDF Custom Template
+ */
 
+// Required to include Gravity PDF helper functions
+if (!class_exists('GFForms')) {
+    return;
+}
+
+// Get entry data
+$member_type = rgar($entry, '1'); // Radio field (Member / Sponsor / Guest) — replace '1' with actual field ID
+$guest_saturday_qty = (int) rgar($entry, '2'); // Saturday Guest quantity — replace with actual ID
+$guest_sunday_qty   = (int) rgar($entry, '3'); // Sunday Guest quantity
+$guest_tuesday_qty  = (int) rgar($entry, '4'); // Tuesday Guest quantity
+$additional_sponsor_qty = (int) rgar($entry, '5'); // Additional Sponsor count — replace with actual ID
+
+// Initialize total
+$total = 0;
+
+// Calculate total based on member type
+if ($member_type === 'Member') {
+    $total = 1200;
+} elseif ($member_type === 'Sponsor/Vendor') {
+    $total = 2500 + ($additional_sponsor_qty * 1200);
+} elseif ($member_type === 'Guest') {
+    $total = ($guest_saturday_qty * 100) + ($guest_sunday_qty * 150) + ($guest_tuesday_qty * 150);
+}
+
+// Start PDF HTML
+?>
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <style>
+        body { font-family: sans-serif; font-size: 12pt; }
+        h2 { color: #333; }
+        p { margin: 0 0 10px; }
+    </style>
+</head>
+<body>
+
+<h2><strong>Invoice</strong></h2>
+
+<p><strong>Member Type:</strong> <?php echo esc_html($member_type); ?></p>
+
+<?php if ($member_type === 'Sponsor/Vendor'): ?>
+    <p><strong>Sponsor Base Fee:</strong> $2,500.00</p>
+    <p><strong>Additional Sponsor Quantity:</strong> <?php echo $additional_sponsor_qty; ?> × $1,200.00</p>
+<?php endif; ?>
+
+<?php if ($member_type === 'Guest'): ?>
+    <p><strong>Saturday Guests:</strong> <?php echo $guest_saturday_qty; ?> × $100.00</p>
+    <p><strong>Sunday Guests:</strong> <?php echo $guest_sunday_qty; ?> × $150.00</p>
+    <p><strong>Tuesday Guests:</strong> <?php echo $guest_tuesday_qty; ?> × $150.00</p>
+<?php endif; ?>
+
+<h2><strong>Invoice Total:</strong></h2>
+<p><strong>$<?php echo number_format($total, 2); ?></strong></p>
+
+</body>
+</html>
 
 
 
