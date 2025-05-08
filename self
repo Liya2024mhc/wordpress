@@ -1,3 +1,30 @@
+In  divi wordpress
+in gravity form
+i have form three radio button 
+so when i click on member the total amount due i s$1,200.00 this is coming on the pdf ie invoice total $1200
+when i click on sponsor/vendor sponsor fee  $2,500.00 and addition sponsor fee for one person is $1200 if we increase the quantity by 2 then total amount fee would $2500 + ($1200 + $1200) = $4900 
+so these need to be in pdf the invoice total is $4900
+for guest saturday price $100 sunday price $150 tuesday $150 hese also increase when we give quantity to 2 if the person selects saturday, sunday, tuesday is 1 then the total amunt due is $400 these can be varies
+so in pdf for guest invoice total is will $400
+
+now in pdf amount is 
+<h2><strong>Invoice Total:</strong></h2>
+    <?php if (!empty($member_address)): ?>
+    <p>$1,200.00</p>
+    <?php endif; ?>
+    <?php if (!empty($sponsor_address)): ?>
+    <p>$2,500.00</p>
+    <?php endif; ?>
+can you help me with these in dynamic chnage in pdf 
+
+
+
+
+
+
+
+
+
 for self improvement
 1. make a movement in body for everyday
 2. make 2hrs not in involvement in mmoring and in night for phone
