@@ -1,4 +1,57 @@
-In  divi wordpress
+/* Flex layout setup */
+.equal-height-row {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+/* Default column width */
+.equal-height-row > .et_pb_column {
+  width: 32%;
+  margin-bottom: 20px;
+}
+
+/* iPad Pro (12.9") Portrait and Landscape - 3 columns */
+@media only screen 
+  and (min-device-width: 1024px) 
+  and (max-device-width: 1366px) 
+  and (-webkit-min-device-pixel-ratio: 1.5) {
+  
+  .equal-height-row > .et_pb_column {
+    width: 32% !important;
+  }
+}
+
+/* iPad Air (10.9") Landscape - 3 columns */
+@media only screen 
+  and (min-device-width: 820px) 
+  and (max-device-width: 1180px) 
+  and (orientation: landscape) 
+  and (-webkit-min-device-pixel-ratio: 2) {
+  
+  .equal-height-row > .et_pb_column {
+    width: 32% !important;
+  }
+}
+
+/* iPad Mini (8.3") Landscape - 3 columns */
+@media only screen 
+  and (min-device-width: 744px) 
+  and (max-device-width: 1133px) 
+  and (orientation: landscape) 
+  and (-webkit-min-device-pixel-ratio: 2) {
+  
+  .equal-height-row > .et_pb_column {
+    width: 32% !important;
+  }
+}
+
+/* Mobile fallback - stack */
+@media only screen and (max-width: 767px) {
+  .equal-height-row > .et_pb_column {
+    width: 100% !important;
+  }
+}In  divi wordpress
 in gravity form
 i have form three radio button 
 so when i click on member the total amount due i s$1,200.00 this is coming on the pdf ie invoice total $1200
