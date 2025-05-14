@@ -4,27 +4,15 @@ but the text removed the size will get same height
 but that not i need
 i need three boxes in same size
 give solutions
-/* Equal height columns wrapper */
-.equal-height-row {
-  display: flex;
-  flex-wrap: wrap;
-}
 
-/* Each box inside the row */
-.equal-height-box {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  flex: 1 1 33.33%; /* 3 columns */
-  box-sizing: border-box;
-}
 
-/* For mobile responsiveness (e.g., tablets) */
-@media (max-width: 1024px) {
-  .equal-height-box {
-    flex: 1 1 100%;
-  }
-} 
+
+this problem happening in ipad pro, mini, air landscape 
+this issue in divi wordpress
+but the text removed the size will get same height  
+but that not i need
+i need 2 boxes in same size
+give solutions
 
 
 
