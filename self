@@ -1,34 +1,9 @@
- 
-
-
-
-
-ipad mini , ipad air, ipad pro landscape is working fine  with this code
-
-/* iPad Pro Landscape (1366px width) only */
-
-@media only screen and (min-width: 1366px) and (max-width: 1366px) and (orientation: landscape) {
-
-  .ipadpro-landscape-boxes .et_pb_column {
-
-    display: flex;
-
-    flex-direction: column;
-
-  }
-
-
-
-  .ipadpro-landscape-boxes .et_pb_module {
-
-    flex-grow: 1;
-
-  }
-
-}
-
-but in ipad pro portrait like this
-
+this problem happening in ipad pro portrait of 2 boxes is not in same dimensions same for down part boxes also 
+this issue in divi wordpress
+but the text removed the size will get same height  
+but that not i need
+i need three boxes in same size
+give solutions
  
 
 
