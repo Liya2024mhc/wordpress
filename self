@@ -1,25 +1,4 @@
-
-💡 Why This Works:
-This CSS only activates on iPad Pro in landscape mode (1366px wide).
-
-It uses flexbox to make the .et_pb_module inside each .et_pb_column stretch to equal height.
-
-It does not affect any other rows or layouts.
-
-Optional (if still not aligned perfectly):
-Add a min-height to each module to prevent tiny ones from collapsing:
-
-css
-Copy
-Edit
-.ipadpro-landscape-boxes .et_pb_module {
-  min-height: 400px; /* adjust as needed */
-}
-Let me know if you're using a specific module like Call to Action or Blurb — I can tighten the CSS further. Also, if this layout is used in multiple sections, you can reuse this .ipadpro-landscape-boxes class wherever needed.
-
-
-
-
+ 
 
 
 
@@ -48,7 +27,7 @@ ipad mini , ipad air, ipad pro landscape is working fine  with this code
 
 }
 
-but in ipad pro portrait 
+but in ipad pro portrait like this
 
  
 
