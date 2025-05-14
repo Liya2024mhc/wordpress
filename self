@@ -1,138 +1,58 @@
-/* Flex layout setup */
-.equal-height-row {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
-}
 
-/* Default column width */
-.equal-height-row > .et_pb_column {
-  width: 32%;
-  margin-bottom: 20px;
-}
+💡 Why This Works:
+This CSS only activates on iPad Pro in landscape mode (1366px wide).
 
-/* iPad Pro (12.9") Portrait and Landscape - 3 columns */
-@media only screen 
-  and (min-device-width: 1024px) 
-  and (max-device-width: 1366px) 
-  and (-webkit-min-device-pixel-ratio: 1.5) {
-  
-  .equal-height-row > .et_pb_column {
-    width: 32% !important;
+It uses flexbox to make the .et_pb_module inside each .et_pb_column stretch to equal height.
+
+It does not affect any other rows or layouts.
+
+Optional (if still not aligned perfectly):
+Add a min-height to each module to prevent tiny ones from collapsing:
+
+css
+Copy
+Edit
+.ipadpro-landscape-boxes .et_pb_module {
+  min-height: 400px; /* adjust as needed */
+}
+Let me know if you're using a specific module like Call to Action or Blurb — I can tighten the CSS further. Also, if this layout is used in multiple sections, you can reuse this .ipadpro-landscape-boxes class wherever needed.
+
+
+
+
+
+
+
+
+ipad mini , ipad air, ipad pro landscape is working fine  with this code
+
+/* iPad Pro Landscape (1366px width) only */
+
+@media only screen and (min-width: 1366px) and (max-width: 1366px) and (orientation: landscape) {
+
+  .ipadpro-landscape-boxes .et_pb_column {
+
+    display: flex;
+
+    flex-direction: column;
+
   }
-}
 
-/* iPad Air (10.9") Landscape - 3 columns */
-@media only screen 
-  and (min-device-width: 820px) 
-  and (max-device-width: 1180px) 
-  and (orientation: landscape) 
-  and (-webkit-min-device-pixel-ratio: 2) {
-  
-  .equal-height-row > .et_pb_column {
-    width: 32% !important;
+
+
+  .ipadpro-landscape-boxes .et_pb_module {
+
+    flex-grow: 1;
+
   }
+
 }
 
-/* iPad Mini (8.3") Landscape - 3 columns */
-@media only screen 
-  and (min-device-width: 744px) 
-  and (max-device-width: 1133px) 
-  and (orientation: landscape) 
-  and (-webkit-min-device-pixel-ratio: 2) {
-  
-  .equal-height-row > .et_pb_column {
-    width: 32% !important;
-  }
-}
+but in ipad pro portrait 
 
-/* Mobile fallback - stack */
-@media only screen and (max-width: 767px) {
-  .equal-height-row > .et_pb_column {
-    width: 100% !important;
-  }
-}In  divi wordpress
-in gravity form
-i have form three radio button 
-so when i click on member the total amount due i s$1,200.00 this is coming on the pdf ie invoice total $1200
-when i click on sponsor/vendor sponsor fee  $2,500.00 and addition sponsor fee for one person is $1200 if we increase the quantity by 2 then total amount fee would $2500 + ($1200 + $1200) = $4900 
-so these need to be in pdf the invoice total is $4900
-for guest saturday price $100 sunday price $150 tuesday $150 hese also increase when we give quantity to 2 if the person selects saturday, sunday, tuesday is 1 then the total amunt due is $400 these can be varies
-so in pdf for guest invoice total is will $400
+ 
 
-now in pdf amount is 
-<h2><strong>Invoice Total:</strong></h2>
-    <?php if (!empty($member_address)): ?>
-    <p>$1,200.00</p>
-    <?php endif; ?>
-    <?php if (!empty($sponsor_address)): ?>
-    <p>$2,500.00</p>
-    <?php endif; ?>
-can you help me with these in dynamic chnage in pdf 
 
-<?php
-/**
- * Gravity PDF Custom Template
- */
-
-// Required to include Gravity PDF helper functions
-if (!class_exists('GFForms')) {
-    return;
-}
-
-// Get entry data
-$member_type = rgar($entry, '1'); // Radio field (Member / Sponsor / Guest) — replace '1' with actual field ID
-$guest_saturday_qty = (int) rgar($entry, '2'); // Saturday Guest quantity — replace with actual ID
-$guest_sunday_qty   = (int) rgar($entry, '3'); // Sunday Guest quantity
-$guest_tuesday_qty  = (int) rgar($entry, '4'); // Tuesday Guest quantity
-$additional_sponsor_qty = (int) rgar($entry, '5'); // Additional Sponsor count — replace with actual ID
-
-// Initialize total
-$total = 0;
-
-// Calculate total based on member type
-if ($member_type === 'Member') {
-    $total = 1200;
-} elseif ($member_type === 'Sponsor/Vendor') {
-    $total = 2500 + ($additional_sponsor_qty * 1200);
-} elseif ($member_type === 'Guest') {
-    $total = ($guest_saturday_qty * 100) + ($guest_sunday_qty * 150) + ($guest_tuesday_qty * 150);
-}
-
-// Start PDF HTML
-?>
-<!DOCTYPE html>
-<html>
-<head>
-    <meta charset="UTF-8">
-    <style>
-        body { font-family: sans-serif; font-size: 12pt; }
-        h2 { color: #333; }
-        p { margin: 0 0 10px; }
-    </style>
-</head>
-<body>
-
-<h2><strong>Invoice</strong></h2>
-
-<p><strong>Member Type:</strong> <?php echo esc_html($member_type); ?></p>
-
-<?php if ($member_type === 'Sponsor/Vendor'): ?>
-    <p><strong>Sponsor Base Fee:</strong> $2,500.00</p>
-    <p><strong>Additional Sponsor Quantity:</strong> <?php echo $additional_sponsor_qty; ?> × $1,200.00</p>
-<?php endif; ?>
-
-<?php if ($member_type === 'Guest'): ?>
-    <p><strong>Saturday Guests:</strong> <?php echo $guest_saturday_qty; ?> × $100.00</p>
-    <p><strong>Sunday Guests:</strong> <?php echo $guest_sunday_qty; ?> × $150.00</p>
-    <p><strong>Tuesday Guests:</strong> <?php echo $guest_tuesday_qty; ?> × $150.00</p>
-<?php endif; ?>
-
-<h2><strong>Invoice Total:</strong></h2>
-<p><strong>$<?php echo number_format($total, 2); ?></strong></p>
-
-</body>
-</html>
 
 
 
